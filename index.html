@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Price Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(45deg, #4CAF50, #2196F3);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 400px;
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input {
+      padding: 8px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+      display: none;
+    }
+
+    p {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Crypto Price Calculator</h2>
+  <form id="cryptoForm">
+    <label for="invest">Enter Price that you want to INVEST:</label>
+    <input type="text" id="invest" required>
+
+    <label for="uniswap">Enter Quantity From UNISWAP:</label>
+    <input type="text" id="uniswap" required>
+
+    <label for="pana">Enter Quantity From PANAROMA SWAP:</label>
+    <input type="text" id="pana" required>
+
+    <button type="button" onclick="calculate()">Calculate</button>
+  </form>
+
+  <div id="result">
+    <p id="priceDifference"></p>
+    <p id="percentageDifference"></p>
+    <p id="profit"></p>
+  </div>
+</div>
+
+<script>
+  function calculate() {
+    var invest = parseFloat(document.getElementById('invest').value);
+    var uniswap = parseFloat(document.getElementById('uniswap').value);
+    var pana = parseFloat(document.getElementById('pana').value);
+
+    var d, e, per;
+
+    if (uniswap < pana) {
+      d = pana - uniswap;
+      e = d / uniswap;
+      per = e * 100;
+    } else if (uniswap > pana) {
+      d = uniswap - pana;
+      e = d / pana;
+      per = e * 100;
+    } else {
+      alert("Prices are equal!");
+      return;
+    }
+
+    document.getElementById('priceDifference').innerText = "The difference between both is " + d;
+    document.getElementById('percentageDifference').innerText = "The percentage difference is " + per + "%";
+
+    var profit = invest * (per / 100);
+    document.getElementById('profit').innerText = "The profit of this trade is " + profit.toFixed(2);
+
+    document.getElementById('result').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
