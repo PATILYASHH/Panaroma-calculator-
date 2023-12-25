@@ -1,4 +1,4 @@
-# Panaroma-calculator-
+# difference calculator-
 https://cryptocalculator.vercel.app
 
 this calculator made for calculating difference between two pairs
